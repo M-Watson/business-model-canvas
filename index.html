@@ -1,0 +1,123 @@
+<head>
+<link rel="stylesheet" href="style.css">
+ <script src="script.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+ <script src="html2canvas.min.js"></script>
+ <script src="https://use.fontawesome.com/03b2f0212a.js"></script>
+
+</head>
+
+
+
+<body>
+
+<div class="add">
+  <span>Add note</span>
+  <i class="fa fa-plus-square-o fa-fw"></i>
+</div>
+
+<div class="add-note">
+  <input name="title" id="title" maxlength="75" placeholder="Title"/>
+  <textarea name="text" id="text" cols="25" rows="5" placeholder="Text"></textarea>
+  <button>Add</button>
+</div>
+
+<div id="capture" style="height:1000px;padding: 0px;">
+
+<div class="wrapper" style="width:100%;display:grid;grid-template-columns: 20% 20% 20% 20% 20%;grid-template-rows: 75% 25%">
+
+
+  <div style="border:solid black;border-width: thin;">
+    <h2> Key Partners </h2>
+  </div>
+
+  <div style="border:solid black;border-width: thin;">
+    <div style="border:solid black;height:50%;border-width: thin;">
+      <h2> Key Activities </h2>
+    </div>
+    <div style="border:solid black;height:50%;border-width: thin;">
+      <h2> Key Resources </h2>
+    </div>
+  </div>
+
+  <div style="border:solid black;border-width: thin;">
+    <h2> Value Propositions </h2>
+  </div>
+
+  <div style="border:solid black;border-width: thin;">
+    <div style="border:solid black;height:50%;border-width: thin;">
+      <h2> Customer Relationships </h2>
+    </div>
+    <div style="border:solid black;height:50%;border-width: thin;">
+      <h2> Channels </h2>
+    </div>
+  </div>
+
+  <div style="border:solid black;border-width: thin;">
+    <h2> Customer Segments </h2>
+  </div>
+
+
+  <div style="border-left:solid black;border-width: thin;">
+    <h2> Cost Structure </h2>
+  </div>
+  <div style="border:none;">
+  </div>
+
+
+  <div style="border-right:none;">
+    <div style="border-bottom:solid black;border-width: thin;border-right:solid black;width:50%;height:100%;border-width: thin;">
+    </div>
+    <div style="border-bottom:solid black;border-width: thin;">
+    </div>
+  </div>
+
+  <div style="border-bottom:solid black;border-width: thin;">
+<h2> Revenue Streams </h2>
+  </div>
+
+  <div style="border-right:solid black;border-width: thin;">
+  </div>
+
+</div>
+</div>
+<input id="click" type="button" value="clickme" onclick="capture();" />
+
+
+</body>
+
+<script>
+function capture(){
+  document.getElementById("click").addEventListener("click", function() {
+      html2canvas(document.querySelector('#capture')).then(function(canvas) {
+          saveAs(canvas.toDataURL(), 'business-model-canvas.jpg');
+      });
+  });
+}
+
+
+function saveAs(uri, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+        link.href = uri;
+        link.download = filename;
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+        //simulate click
+        link.click();
+        //remove the link when done
+        document.body.removeChild(link);
+    } else {
+        window.open(uri);
+    }
+}
+</script>
+
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="mainbar">
+      <span>{{title}}</span>
+      <div class="close"><i class="fa fa-times-circle fa-fw"></i></div>
+      <div class="minimize"><i class="fa fa-minus-square-o fa-fw"></i></div>
+    </div>
+    <pre class="text">{{text}}</pre>
+</script>
